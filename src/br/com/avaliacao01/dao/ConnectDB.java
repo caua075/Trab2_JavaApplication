@@ -10,8 +10,8 @@ public class ConnectDB {
     public static void openDB(){
         try{
             String nomeBD = "carro";
-            String usuario = "postgres";
-            String senha = "postdba";
+            String usuario = "seuUsuario";
+            String senha = "suaSenha";
             
             //DriverManager.registerDriver(new org.postgresql.Driver());
             
