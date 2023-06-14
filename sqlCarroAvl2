@@ -1,0 +1,63 @@
+CREATE TABLE locadora(
+	id_loc serial,
+	cnpj_loc character varying(15),
+	nome_loc character varying(50),
+	tel_loc character varying(13),
+	rua_loc character varying(50),
+	num_loc integer,
+	bairro_loc character varying(20),
+	cidade_loc character varying(20),
+	CONSTRAINT locadora_pkey PRIMARY KEY (id_loc),
+	CONSTRAINT locadora_cnpj_key UNIQUE (cnpj_loc)
+);
+
+CREATE TABLE carro(
+    id serial,
+    nome character varying(50),
+    marca character varying(15),
+    cor character varying(20),
+    placa character varying(8),
+    chassi character varying(17),
+    id_loc integer,
+    CONSTRAINT carro_pkey PRIMARY KEY (id),
+    CONSTRAINT carro_chassi_key UNIQUE (chassi),
+	CONSTRAINT carro_placa_key UNIQUE (placa),
+	CONSTRAINT locadora_fk FOREIGN KEY (id_loc) REFERENCES locadora (id_loc)
+);
+
+CREATE TABLE cliente(
+	id_cli serial,
+	cpf_cli character varying(14),
+	nome_cli character varying(50),
+	rua_cli character varying(50),
+	num_cli integer,
+	bairro_cli character varying(20),
+	cidade_cli character varying(20),
+	estado_cli character varying(3),
+	cep_cli character varying(9),
+	CONSTRAINT cliente_pkey PRIMARY KEY (id_cli),
+	CONSTRAINT cliente_cpf_pkey UNIQUE (cpf_cli)
+)
+
+CREATE TABLE alugaCarro(
+	dta_loc date,
+	vlr_alu double precision,
+	id_cli integer,
+	id_car integer,
+	CONSTRAINT alugaCarro_id_cli_fkey FOREIGN KEY(id_cli) REFERENCES cliente(id_cli),
+	CONSTRAINT alugaCarro_id_car_fkey FOREIGN KEY(id_car) REFERENCES carro(id)
+);
+
+CREATE TABLE funcionario(
+	id_fun serial,
+	nome_fun character varying(50),
+	login_fun character varying(50),
+	senha_fun character varying(50),
+	tipo_fun character varying(13),
+	CONSTRAINT funcionario_pkey PRIMARY KEY (id_fun),
+	CONSTRAINT funcionario_login_pkey UNIQUE (login_fun)
+)
+
+
+
+
